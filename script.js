@@ -73,17 +73,29 @@ function playRound(humChoice, compChoice) {
     } else if (winner === 'computer') {
         computerScore++;
     }
-    //console.log(`Winner is ${winner}, human chose ${humChoice}, computer chose ${compChoice}\nScores are human: ${humanScore} to computer: ${computerScore}`);
+    printWinner(`Winner is ${winner}, human chose ${humChoice}, computer chose ${compChoice}`, currentGame);
+    printWinner(`Human: ${humanScore} and Computer: ${computerScore}`, score);
+    checkScore();
 }
 
 function declareWinner() {
     if (humanScore > computerScore) {
-        console.log(`Human won with a score of ${humanScore} to ${computerScore}`);
+        printWinner(`Human won with a score of ${humanScore} to ${computerScore}`, result);
     } else if (computerScore > humanScore) {
-        console.log(`Computer won with a score of ${computerScore} to ${humanScore}`);
+        printWinner(`Computer won with a score of ${computerScore} to ${humanScore}`, result);
     } else {
-        console.log(`It was a tie with a score of ${humanScore} to ${computerScore}`);
+        printWinner(`It was a tie with a score of ${humanScore} to ${computerScore}`, result);
     }
+}
+
+function checkScore() {
+    if (humanScore >= 5 || computerScore >= 5) {
+        declareWinner();
+    }
+}
+
+function printWinner(str, element) {
+    element.textContent = str;
 }
 
 
@@ -94,4 +106,16 @@ function playGame() {
     declareWinner();
 }
 
-playGame();
+const gameBoard = document.querySelector('.container');
+const btnList = document.querySelectorAll('button');
+const currentGame = document.querySelector('.current-game');
+const score = document.querySelector('.score');
+const result = document.querySelector('.declare-winner');
+
+btnList.forEach((button) => {
+    button.addEventListener('click', () => {
+        playRound(button.id, getComputerChoice());
+    });
+});
+
+
