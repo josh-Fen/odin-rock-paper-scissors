@@ -1,6 +1,12 @@
 let humanScore = 0;
 let computerScore = 0;
 
+const gameBoard = document.querySelector('.container');
+const btnList = document.querySelectorAll('button');
+const currentGame = document.querySelector('.current-game');
+const score = document.querySelector('.score');
+const result = document.querySelector('.declare-winner');
+
 function getComputerChoice() {
     let num = Math.floor(Math.random() * 3);
     let compChoice = null;
@@ -97,20 +103,6 @@ function checkScore() {
 function printWinner(str, element) {
     element.textContent = str;
 }
-
-
-function playGame() {
-    for (let i = 0; i < 5; i++) {
-        playRound(getHumanChoice(), getComputerChoice());
-    }
-    declareWinner();
-}
-
-const gameBoard = document.querySelector('.container');
-const btnList = document.querySelectorAll('button');
-const currentGame = document.querySelector('.current-game');
-const score = document.querySelector('.score');
-const result = document.querySelector('.declare-winner');
 
 btnList.forEach((button) => {
     button.addEventListener('click', () => {
